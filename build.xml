@@ -1,0 +1,37 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+
+<project name="Doberman" default="deploy" basedir=".">
+    
+  <description>Ant - Doberman</description>
+
+  <property name="src" location="src"/>
+  <property name="lib" location="lib"/>
+  <property name="build" location="classes"/>  
+  <property name="deploy1" location="E:\capricciosa\html\WEB-INF"/>
+  <property name="deploy2" location="E:\easy-lib"/>
+  
+   <path id="classpath">
+      <pathelement location="${lib}/*.jar"/>
+   </path>
+
+  <target name="init">
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source">
+    <javac srcdir="${src}" destdir="${build}" debug="yes">
+      <classpath refid="classpath"/>
+    </javac>
+  </target>
+
+  <target name="deploy" depends="compile" description="generate the distribution">
+    <!--<mkdir dir="${deploy}/lib"/>-->
+    <jar jarfile="${deploy1}/lib/doberman.jar" basedir="${build}"/>
+    <jar jarfile="${deploy2}/lib/doberman.jar" basedir="${build}"/>
+  </target>
+
+  <target name="clean" description="clean up">
+    <delete dir="${build}"/>
+  </target>
+
+</project>
